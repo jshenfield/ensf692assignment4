@@ -89,17 +89,26 @@ def main():
     dogbreed2023percent = (dogbreed2023total/alldogbreed2023total) # calculate the percentage of dog breeds
     
     # Overall calculations
-    dogbreedtotal = sum(dogbreed['Total'])
-    overallbreedtotal = sum(data['Total'])
-    overallbreedpercent = (dogbreedtotal/overallbreedtotal)
+    dogbreedtotal = sum(dogbreed['Total']) # calculate total number of dogs across all years for current dog breed
+    overallbreedtotal = sum(data['Total']) # calculate total number of dogs across all years for all dog breeds
+    overallbreedpercent = (dogbreedtotal/overallbreedtotal) # calculate percent
 
+    # Print percentages for each year and overall
     print("The ", dogbreedname, "was", round(dogbreed2021percent * 100, 6), "% of top breeds in 2021.")
     print("The ", dogbreedname, "was", round(dogbreed2022percent * 100, 6), "% of top breeds in 2022.")
     print("The ", dogbreedname, "was", round(dogbreed2023percent * 100, 6), "% of top breeds in 2023.")
     print("The ", dogbreedname, "was", round(overallbreedpercent * 100, 6), "% of top breeds across all years.")
 
+    # Best month calculation
+    # As per advice in class, the calculation I chose to perform was the month with the highest number of entries
+    # for the given dog breed
+    # The following finds which year had the most dogs, and extracts the name of the month (months in case of a tie)
+    bestmonthcount = (dogbreed['Total'].values).max()
+    bestmonthdata = dogbreed[dogbreed['Total'].values == bestmonthcount]
+    bestmonth = bestmonthdata['Month'].values
 
-    #print("Most popular month(s) for ", dogbreedname, " dogs:",       )
+    # Print statement
+    print("Most popular month(s) for ", dogbreedname, " dogs:", bestmonth)
 
 if __name__ == '__main__':
     main()
