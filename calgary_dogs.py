@@ -64,7 +64,7 @@ def main():
 
     dogbreedname = dogbreed['Breed'].values[1] # extracts just the name of the dog breed for printing purposes
 
-    print("The ", dogbreedname, "was found in the top breeds for the years: ", dogbreed['Year'].unique())
+    print("The ", dogbreedname, "was found in the top breeds for the years: ", *dogbreed['Year'].unique()) # unpacks years for printing
     print("There have been ", sum(dogbreed['Total']), dogbreedname, "dogs registered in total.")
 
     # 2021 calculations
@@ -106,6 +106,8 @@ def main():
     bestmonthcount = (dogbreed['Total'].values).max()
     bestmonthdata = dogbreed[dogbreed['Total'].values == bestmonthcount]
     bestmonth = bestmonthdata['Month'].values
+    bestmonth = bestmonth[0] # convert to string instead of array for printing
+    print(type(bestmonth))
 
     # Print statement
     print("Most popular month(s) for ", dogbreedname, " dogs:", bestmonth)
